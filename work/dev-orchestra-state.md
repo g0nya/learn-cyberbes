@@ -1,14 +1,14 @@
 # Dev Orchestra state
-Objective: separate terminal window with Russian main menu and clear live network dashboard.
-Acceptance: PowerShell 5.1; convenient root launcher; adapter/interval/CSV settings; incoming/outgoing rates and totals; Q/Esc returns menu; preserve parameter CLI and CSV; meaningful verification and independent review; push existing PR #1.
-Workspace: C:\Users\Nikita\Desktop\project. Branch: codex/windows-traffic-monitor.
-Phase: implementation. Existing discovery evidence sufficient; planning/design integrated with builder for straightforward terminal UI.
-Agents: /root/builder (gpt-6.1-sol medium) implements/verifies; /root/discovery (gpt-6-luna high) read-only launcher/verification advice; /root/review (gpt-6-astra low) reserved independent review.
-Ownership: builder code/docs/tests; root this manifest and Git release. No overlapping writes.
-Evidence: clean tree at fc56050; PR #1 open; native NetAdapter and Windows PowerShell 5.1 available.
-Blockers: none identified.
-Final changes: Start-TrafficMonitor.cmd, TrafficConsole.psm1, Watch-NetworkTraffic.ps1, Test-TrafficConsole.ps1, README.md. Main menu and refreshing dashboard complete; quoted separate-window launch uses project working directory.
-Verification: native PS5.1 accounting and console tests passed; all source parsers passed; live PS5.1 Ethernet CLI CSV produced two valid rows; UTF8 BOM and whitespace checks passed. Menu input and stop key were mocked in tests.
-Review: /root/review independently assessed final implementation and launcher follow-up; no actionable findings.
-Launch: root invoked launcher; native powershell process confirmed running. Visual layout, physical keyboard and resizing were not verified by automation.
-Phase: verified; release into existing PR #1. No blockers.
+Objective: rewrite the entire Windows 11 traffic monitor in Python, retaining the separate terminal window and Russian menu.
+Acceptance: native Python monitoring; selected active adapters; measured rates and session totals; resets/reconnects; CSV; CLI; responsive Q/Esc; quoted separate-window launcher; dependency/install docs; remove old PowerShell implementation/tests.
+Workspace: C:\Users\Nikita\Desktop\project; branch codex/windows-traffic-monitor; baseline d4be64c; existing PR #1.
+Phase: discovery/planning and implementation. Routine maintainable design owned by builder; native API complexity to be avoided if psutil covers requirements.
+Agents: /root/discovery Luna high (read-only runtime/API advice); /root/builder Sol medium (implementation/docs/tests); /root/review Astra low (reserved independent review).
+Ownership: root manifest/Git release; builder source/tests/docs. No overlapping writes.
+Checks/findings: pending.
+Blockers: none established.
+Final changes: traffic_monitor.py (native psutil accounting/backend/console/menu/CLI), requirements.txt, tests/test_traffic_monitor.py, Python launcher and Russian README; obsolete PowerShell implementation/tests removed.
+Checks: 17 unittest tests passed on CPython3.14.6/psutil7.2.2; Python3.10 grammar validation; real Ethernet two samples and CSV; unknown adapter/existing CSV errors; whitespace check. ConPTY rendered Russian menu and native three-interface dashboard, accepted start, Q return and 0 exit with console restoration. Root launcher invoked; Python interactive process confirmed.
+Review: Astra independent final review passed 17 tests; CLI misleading Q/Esc hint fixed/reviewed; native errors wrapped; no unresolved findings. Launcher process-local no-auto-install flags separately reviewed against official Python docs.
+Limitations: physical window appearance/resize and launcher paths with spaces not manually inspected. CSV paths with Unicode/spaces covered.
+Phase: complete implementation/verification/review; release into PR #1.

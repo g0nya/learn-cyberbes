@@ -1,2 +1,5 @@
 # Generated traffic logs
 traffic-*.csv
+__pycache__/
+*.py[cod]
+.venv/
